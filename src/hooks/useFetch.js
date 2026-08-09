@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react'
 
-// Custom hook reutilizable para peticiones de datos.
-// Ejecuta el `fetcher` dentro de un useEffect, gestiona los estados
-// loading / error / data y cancela la peticion si el componente se desmonta
-// (AbortController) evitando actualizaciones de estado sobre componentes muertos.
-//
-// @param {(signal: AbortSignal) => Promise<any>} fetcher  funcion asincrona
-// @param {Array} deps  dependencias que, al cambiar, relanzan la peticion
 export function useFetch(fetcher, deps = []) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)

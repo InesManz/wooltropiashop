@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 // Boton reutilizable con variantes de marca.
-// Puede renderizar <button>, o un <Link> si se pasa `to`, o <a> si se pasa `href`.
+
 const VARIANTS = {
   primary:
     'bg-primary text-on-primary hover:bg-primary-container shadow-ambient',

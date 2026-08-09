@@ -1,32 +1,45 @@
-// Capa de acceso a datos (API).
-// Los productos se sirven como un endpoint JSON (public/data/products.json) y se
-// consumen con fetch. Se centraliza aqui para que las paginas no conozcan la URL.
-// Se anade una pequena latencia simulada para poder mostrar estados de carga reales.
-
-const ENDPOINT = '/data/products.json'
-const FAKE_LATENCY = 500 // ms, para que el estado "loading" sea visible
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+const FALLBACK = '/data/products.json'
+const FAKE_LATENCY = 300 
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-// Devuelve el listado completo de productos.
-export async function fetchProducts(signal) {
-  const res = await fetch(ENDPOINT, { signal })
-  if (!res.ok) {
-    throw new Error(`Error ${res.status} al cargar los productos`)
-  }
-  const data = await res.json()
-  await delay(FAKE_LATENCY)
-  return data
+async function getJson(url, signal) {
+  const res = await fetch(url, { signal })
+  if (!res.ok) throw new Error(`Error ${res.status}`)
+  return res.json()
 }
 
-// Devuelve un producto por su slug (usado en la ficha de producto).
-export async function fetchProductBySlug(slug, signal) {
-  const products = await fetchProducts(signal)
-  const product = products.find((p) => p.slug === slug)
-  if (!product) {
-    throw new Error('Producto no encontrado')
+// Listado completo de productos (GET /products).
+export async function fetchProducts(signal) {
+  try {
+    const data = await getJson(`${API_BASE}/products`, signal)
+    await delay(FAKE_LATENCY)
+    return data
+  } catch (err) {
+    if (err.name === 'AbortError') throw err
+    // Fallback al JSON local
+    return getJson(FALLBACK, signal)
   }
-  return product
+}
+
+// Producto por slug.
+export async function fetchProductBySlug(slug, signal) {
+  try {
+    const data = await getJson(
+      `${API_BASE}/products?slug=${encodeURIComponent(slug)}`,
+      signal,
+    )
+    if (Array.isArray(data) && data.length > 0) return data[0]
+    throw new Error('Producto no encontrado en la API')
+  } catch (err) {
+    if (err.name === 'AbortError') throw err
+    // Fallback: busca en el JSON local
+    const all = await getJson(FALLBACK, signal)
+    const product = all.find((p) => p.slug === slug)
+    if (!product) throw new Error('Producto no encontrado')
+    return product
+  }
 }

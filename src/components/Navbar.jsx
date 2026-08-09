@@ -19,9 +19,9 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-[#eee0b3] shadow-sm">
-      <div className="mx-auto flex h-20 max-w-content items-center justify-between px-5 md:px-16">
+      <div className="mx-auto flex h-28 max-w-content items-center justify-between px-5 md:px-16">
         <Link to="/" className="block" aria-label="Wooltropia inicio">
-          <img src="/logo.png" alt="Wooltropia" className="h-16 w-auto" />
+          <img src="/logo.png" alt="Wooltropia" className="h-24 w-auto" />
         </Link>
 
         {/* Navegacion escritorio */}

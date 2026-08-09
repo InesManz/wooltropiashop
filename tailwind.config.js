@@ -48,7 +48,8 @@ export default {
         'on-error-container': '#93000a',
       },
       fontFamily: {
-        heading: ['"Playfair Display"', 'serif'],
+        // Fraunces: serif con carácter para titulares.
+        heading: ['Fraunces', 'Georgia', 'serif'],
         body: ['Montserrat', 'system-ui', 'sans-serif'],
       },
       borderRadius: {

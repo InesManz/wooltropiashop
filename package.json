@@ -6,6 +6,8 @@
   "description": "Wooltropia - Tienda de artesania en lana y homeware impreso en 3D. Proyecto 2 ReactJS.",
   "scripts": {
     "dev": "vite",
+    "api": "json-server --watch db.json --port 3001",
+    "dev:full": "concurrently -n API,WEB -c magenta,cyan \"npm run api\" \"npm run dev\"",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -18,6 +20,8 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "json-server": "^0.17.4",
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.7",
     "vite": "^5.3.5"

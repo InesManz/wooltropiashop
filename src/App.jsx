@@ -8,8 +8,7 @@ import Checkout from './pages/Checkout.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import NotFound from './pages/NotFound.jsx'
 
-// Enrutado principal con react-router-dom.
-// Todas las paginas comparten <Layout /> (navbar + footer) mediante rutas anidadas.
+//  rutas anidadas.
 export default function App() {
   return (
     <Routes>

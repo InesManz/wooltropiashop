@@ -7,11 +7,10 @@ import {
   useCallback,
 } from 'react'
 
-// -----------------------------------------------------------------------------
+
 // Estado global del carrito mediante useContext + useReducer.
 // Cualquier pagina/componente accede al carrito con el hook useCart() sin
 // prop-drilling. El reducer centraliza toda la logica de mutacion.
-// -----------------------------------------------------------------------------
 
 const CartContext = createContext(null)
 

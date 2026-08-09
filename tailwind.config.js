@@ -6,9 +6,9 @@ export default {
     extend: {
       colors: {
         // Superficies (paleta terracota calida)
-        background: '#fff8f6',
-        surface: '#fff8f6',
-        'surface-bright': '#fff8f6',
+        background: '#f1ecdb',
+        surface: '#f1ecdb',
+        'surface-bright': '#f1ecdb',
         'surface-dim': '#e7d6d2',
         'surface-container-lowest': '#ffffff',
         'surface-container-low': '#fff1ed',

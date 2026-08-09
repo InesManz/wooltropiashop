@@ -5,7 +5,7 @@ import { useCart } from '../context/CartContext.jsx'
 const LINKS = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/tienda', label: 'Tienda' },
-  { to: '/dashboard', label: 'App' },
+  { href: 'https://woolith.app', label: 'App', external: true },
 ]
 
 export default function Navbar() {
@@ -18,19 +18,31 @@ export default function Navbar() {
       : 'text-on-surface-variant font-medium hover:text-primary transition-colors'
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background/90 shadow-sm backdrop-blur">
+    <nav className="sticky top-0 z-50 w-full bg-[#eee0b3] shadow-sm">
       <div className="mx-auto flex h-20 max-w-content items-center justify-between px-5 md:px-16">
         <Link to="/" className="block" aria-label="Wooltropia inicio">
-          <img src="/logo.png" alt="Wooltropia" className="h-10 w-auto" />
+          <img src="/logo.png" alt="Wooltropia" className="h-16 w-auto" />
         </Link>
 
         {/* Navegacion escritorio */}
         <div className="hidden items-center gap-8 md:flex">
-          {LINKS.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.end} className={linkClass}>
-              {l.label}
-            </NavLink>
-          ))}
+          {LINKS.map((l) =>
+            l.external ? (
+              <a
+                key={l.label}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-on-surface-variant transition-colors hover:text-primary"
+              >
+                {l.label}
+              </a>
+            ) : (
+              <NavLink key={l.to} to={l.to} end={l.end} className={linkClass}>
+                {l.label}
+              </NavLink>
+            ),
+          )}
         </div>
 
         <div className="flex items-center gap-4">
@@ -69,18 +81,31 @@ export default function Navbar() {
 
       {/* Menu movil desplegable */}
       {open && (
-        <div className="flex flex-col gap-1 border-t border-outline-variant bg-background px-5 py-3 md:hidden">
-          {LINKS.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.end}
-              onClick={() => setOpen(false)}
-              className="py-2 font-medium text-on-surface-variant"
-            >
-              {l.label}
-            </NavLink>
-          ))}
+        <div className="flex flex-col gap-1 border-t border-outline-variant bg-[#eee0b3] px-5 py-3 md:hidden">
+          {LINKS.map((l) =>
+            l.external ? (
+              <a
+                key={l.label}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="py-2 font-medium text-on-surface-variant"
+              >
+                {l.label}
+              </a>
+            ) : (
+              <NavLink
+                key={l.to}
+                to={l.to}
+                end={l.end}
+                onClick={() => setOpen(false)}
+                className="py-2 font-medium text-on-surface-variant"
+              >
+                {l.label}
+              </NavLink>
+            ),
+          )}
         </div>
       )}
     </nav>

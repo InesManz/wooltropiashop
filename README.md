@@ -34,4 +34,4 @@ Si solo lanzo `npm run dev`, la web tira igual: hace fallback al JSON local.
 
 ## Entrega
 
-Proyecto 2 - ReactJS - Inés Manzano Peinado".
+Repo público + correo a antonio.rosales@thepower.education con el asunto "Proyecto 2 - ReactJS - Inés Manzano Peinado".

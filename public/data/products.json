@@ -208,5 +208,62 @@
     "featured": false,
     "image": "/img/ef0cb6e8883a88cc3824d207bf3fc04e.jpg",
     "description": "Aguja auxiliar para trenzas impresa en 3D con forma de bici. Sujeta los puntos en espera mientras cruzas la trenza, sin que se te escape ninguno."
+  },
+  {
+    "id": "16",
+    "slug": "cartel-personalizado-nombre",
+    "name": "Cartel Personalizado con Nombre",
+    "category": "Personalizados",
+    "price": 22.0,
+    "material": "Metal lacado",
+    "colors": ["Negro"],
+    "rating": 4.8,
+    "stock": 20,
+    "featured": false,
+    "image": "/img/il_1588xN.4823601693_epzt.webp",
+    "description": "Cartel decorativo personalizable con el nombre que quieras, enmarcado entre ovillos y una aguja de ganchillo. El regalo perfecto para el rincón de labores de cualquier tejedora."
+  },
+  {
+    "id": "17",
+    "slug": "llavero-personalizado-frase",
+    "name": "Llavero Personalizado con Frase",
+    "category": "Personalizados",
+    "price": 9.0,
+    "material": "PLA",
+    "colors": ["Pastel surtido"],
+    "rating": 4.9,
+    "stock": 35,
+    "featured": true,
+    "image": "/img/il_570xN.8094744972_iciy.avif",
+    "phrases": ["Knit happens", "Just one more row…", "Will knit for wine"],
+    "description": "Llavero impreso en 3D personalizable con tu frase favorita de tejedora. Elige el lema, cuélgalo de tu bolsa de labores y llévalo a todas partes."
+  },
+  {
+    "id": "18",
+    "slug": "yarn-bowl-perezoso",
+    "name": "Yarn Bowl Perezoso 3D",
+    "category": "Cuencos",
+    "price": 31.0,
+    "material": "PLA",
+    "colors": ["Negro"],
+    "rating": 4.7,
+    "stock": 6,
+    "featured": false,
+    "image": "/img/il_1588xN.7214676777_g1wq.avif",
+    "description": "Cuenco de lana con forma de perezoso impreso en 3D. Abraza el ovillo y guía el hilo con toda la calma del mundo, como buen perezoso."
+  },
+  {
+    "id": "19",
+    "slug": "mini-macetas-set",
+    "name": "Mini Macetas Decorativas (set)",
+    "category": "Accesorios",
+    "price": 15.0,
+    "material": "PLA",
+    "colors": ["Pastel surtido"],
+    "rating": 4.5,
+    "stock": 18,
+    "featured": false,
+    "image": "/img/il_1588xN.6633368274_a6gr.avif",
+    "description": "Juego de mini macetas pastel impresas en 3D para decorar tu rincón de labores con un toque verde."
   }
 ]

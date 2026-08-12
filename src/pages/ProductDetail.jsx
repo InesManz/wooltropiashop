@@ -23,12 +23,24 @@ export default function ProductDetail() {
 
   const [qty, setQty] = useState(1)
   const [added, setAdded] = useState(false)
+  const [phrase, setPhrase] = useState('') // frase elegida (productos personalizables)
 
   const handleAdd = useCallback(() => {
-    addItem(product, qty)
+    let item = product
+    // Si el producto es personalizable, creamos una variante con la frase elegida.
+    if (product.phrases && product.phrases.length) {
+      const chosen = phrase || product.phrases[0]
+      item = {
+        ...product,
+        id: `${product.id}::${chosen}`,
+        name: `${product.name} — “${chosen}”`,
+        customPhrase: chosen,
+      }
+    }
+    addItem(item, qty)
     setAdded(true)
     setTimeout(() => setAdded(false), 1800)
-  }, [addItem, product, qty])
+  }, [addItem, product, qty, phrase])
 
   if (loading) return <Loader label="Cargando producto…" />
   if (error)
@@ -98,6 +110,34 @@ export default function ProductDetail() {
               </dd>
             </div>
           </dl>
+
+          {/* Selector de frase (solo productos personalizables) */}
+          {product.phrases && (
+            <div className="mt-6">
+              <p className="label mb-2 text-xs text-on-surface-variant">
+                Elige tu frase
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {product.phrases.map((ph) => {
+                  const active = (phrase || product.phrases[0]) === ph
+                  return (
+                    <button
+                      key={ph}
+                      type="button"
+                      onClick={() => setPhrase(ph)}
+                      className={`rounded-full border px-4 py-2 text-sm transition-colors ${
+                        active
+                          ? 'border-primary bg-primary text-on-primary'
+                          : 'border-outline-variant text-on-surface-variant hover:border-primary'
+                      }`}
+                    >
+                      “{ph}”
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <QuantityStepper value={qty} onChange={setQty} max={product.stock} />

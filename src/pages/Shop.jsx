@@ -20,6 +20,7 @@ const SECTION_ORDER = [
   'Medición',
   'Topes',
   'Accesorios',
+  'Personalizados',
 ]
 
 export default function Shop() {

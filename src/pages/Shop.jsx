@@ -12,6 +12,16 @@ const SORTS = {
   rating: 'Mejor valorados',
 }
 
+// Orden en el que se muestran las secciones (chips y bloques de la tienda).
+const SECTION_ORDER = [
+  'Cuencos',
+  'Portaovillos',
+  'Marcadores',
+  'Medición',
+  'Topes',
+  'Accesorios',
+]
+
 export default function Shop() {
   // Peticion de datos (useEffect via useFetch).
   const { data: products, loading, error } = useFetch((signal) =>
@@ -26,10 +36,12 @@ export default function Shop() {
 
   const handleAdd = useCallback((product) => addItem(product, 1), [addItem])
 
-  // Categorias derivadas de los datos.
+  // Categorias derivadas de los datos, ordenadas segun SECTION_ORDER.
   const categories = useMemo(() => {
     const set = new Set((products || []).map((p) => p.category))
-    return ['Todos', ...set]
+    const ordered = SECTION_ORDER.filter((c) => set.has(c))
+    const rest = [...set].filter((c) => !SECTION_ORDER.includes(c))
+    return ['Todos', ...ordered, ...rest]
   }, [products])
 
   // Lista filtrada y ordenada, memoizada: solo se recalcula si cambian
@@ -61,6 +73,15 @@ export default function Shop() {
     }
     return sorted
   }, [products, category, query, sort])
+
+  // Cuando no hay filtro ni búsqueda, mostramos la tienda agrupada por secciones.
+  const showSections = category === 'Todos' && !query.trim()
+  const sections = useMemo(() => {
+    const order = categories.filter((c) => c !== 'Todos')
+    return order
+      .map((name) => ({ name, items: visible.filter((p) => p.category === name) }))
+      .filter((s) => s.items.length > 0)
+  }, [categories, visible])
 
   return (
     <div className="mx-auto max-w-content px-5 py-12 md:px-16">
@@ -120,22 +141,46 @@ export default function Shop() {
       {loading && <Loader label="Cargando productos…" />}
       {error && <p className="py-16 text-center text-error">{error}</p>}
 
-      {!loading && !error && (
+      {!loading && !error && visible.length === 0 && (
+        <p className="py-16 text-center text-on-surface-variant">
+          No hay resultados para tu búsqueda.
+        </p>
+      )}
+
+      {/* Vista por secciones (sin filtro ni búsqueda) */}
+      {!loading && !error && visible.length > 0 && showSections && (
+        <div className="space-y-14">
+          {sections.map((s) => (
+            <section key={s.name}>
+              <div className="mb-5 flex items-baseline justify-between border-b border-outline-variant pb-2">
+                <h2 className="font-heading text-2xl text-on-background md:text-3xl">
+                  {s.name}
+                </h2>
+                <span className="text-xs text-on-surface-variant">
+                  {s.items.length} art.
+                </span>
+              </div>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {s.items.map((p) => (
+                  <ProductCard key={p.id} product={p} onAdd={handleAdd} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      )}
+
+      {/* Vista plana (con filtro o búsqueda activos) */}
+      {!loading && !error && visible.length > 0 && !showSections && (
         <>
           <p className="mb-4 text-sm text-on-surface-variant">
             {visible.length} producto{visible.length !== 1 && 's'}
           </p>
-          {visible.length === 0 ? (
-            <p className="py-16 text-center text-on-surface-variant">
-              No hay resultados para tu búsqueda.
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {visible.map((p) => (
-                <ProductCard key={p.id} product={p} onAdd={handleAdd} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {visible.map((p) => (
+              <ProductCard key={p.id} product={p} onAdd={handleAdd} />
+            ))}
+          </div>
         </>
       )}
     </div>

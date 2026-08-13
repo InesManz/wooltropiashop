@@ -31,6 +31,7 @@ export default function Shop() {
   const { addItem } = useCart()
 
   // Estados de la pagina (filtros de la tienda).
+  // REQUISITO 4 (varios estados con sentido): búsqueda, categoría y orden.
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('Todos')
   const [sort, setSort] = useState('featured')

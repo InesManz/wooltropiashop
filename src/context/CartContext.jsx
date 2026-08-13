@@ -8,9 +8,11 @@ import {
 } from 'react'
 
 
-// Estado global del carrito mediante useContext + useReducer.
-// Cualquier pagina/componente accede al carrito con el hook useCart() sin
-// prop-drilling. El reducer centraliza toda la logica de mutacion.
+// REQUISITO 11: useContext. Estado global del carrito mediante Context + useReducer.
+// Cualquier página/componente accede al carrito con el hook useCart() sin
+// prop-drilling. El reducer centraliza toda la lógica de mutación.
+// (REQUISITO 9: acciones con useCallback y value con useMemo para no forzar
+//  re-renders en los consumidores.)
 
 const CartContext = createContext(null)
 

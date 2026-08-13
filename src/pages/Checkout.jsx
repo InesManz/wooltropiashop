@@ -1,4 +1,5 @@
 import { useState } from 'react'
+// REQUISITO 7 (formulario útil): checkout gestionado con react-hook-form.
 import { useForm } from 'react-hook-form'
 import { Link, Navigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext.jsx'

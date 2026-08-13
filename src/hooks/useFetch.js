@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 
+// REQUISITO 10 (custom hook) + REQUISITO 5 (useEffect para peticiones de datos).
+// Ejecuta un fetcher dentro de useEffect y gestiona loading/error/data,
+// cancelando la petición con AbortController al desmontar.
 export function useFetch(fetcher, deps = []) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)

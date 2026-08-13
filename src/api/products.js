@@ -1,3 +1,6 @@
+// REQUISITO 6 (uso de una API): API REST propia con json-server (db.json).
+// Endpoints /products y /products?slug=... consumidos con fetch; si la API no
+// está levantada, se recurre al JSON local como fallback.
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 const FALLBACK = '/data/products.json'
 const FAKE_LATENCY = 300 

@@ -8,7 +8,7 @@ import Checkout from './pages/Checkout.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import NotFound from './pages/NotFound.jsx'
 
-//  rutas anidadas.
+// REQUISITO 3: enrutado con react-router-dom (rutas anidadas bajo un Layout común).
 export default function App() {
   return (
     <Routes>

@@ -1,3 +1,5 @@
+// REQUISITO 8 (componente reutilizable) + REQUISITO 9 (React.memo: la tarjeta
+// solo se re-renderiza si cambian sus props, evitando redibujar todo el grid).
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import Chip from './Chip.jsx'
